@@ -1,0 +1,8 @@
+<h1>삭제 확인 Page</h1>
+
+<form method='post'>
+    {% csrf_token %}
+    <button type="button" onclick="location.href='{% url 'course:m_list' %}'">아니오</button>
+    <input type="submit" value="예 삭제하겠습니다."/>
+
+</form>
