@@ -1,0 +1,13 @@
+<h1> 전공 전체 조회 </h1>
+
+<table border="1">
+<tr>
+    <td>major_ID</td><td>전공명</td>
+</tr>
+{% for major in major_list  %}
+<tr>
+    <td>{{major.major_id}}</td>
+    <td>{{major.major_title}}</td>
+</tr>
+{% endfor %}
+</table>
