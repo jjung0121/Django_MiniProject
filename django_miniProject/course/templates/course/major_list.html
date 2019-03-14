@@ -1,9 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(function(){
+    $("#btn1").click(function(){
+        // alert("ajax 코드")
+        $.ajax({
+            url : "/course/searchMajor/",
+            datatype :"text",
+            type :"POST",
+            data : {"m_id":$("#search").val()},
+            success : function(result){
+                // alert(result);
+                $('#here').html(result)
+            }
+        });
+    });    
+});
+</script>
+
+
 <h1> 전공 전체 조회 </h1>
 
 <hr>
 <button onclick="location.href='{% url 'course:m_new' %}'">신규생성</button>
+
+{% comment %} Ajax 이용한 검색 기능 구현{% endcomment %}
+<input type="text" id="search">
+<button id = "btn1">전공 검색</button>
+
+
 <p>
 
+<div id="here">
 <table border="1">
 <tr>
     <td>major_ID</td><td>전공명</td><td>수정</td><td>삭제</td>
@@ -17,3 +44,4 @@
 </tr>
 {% endfor %}
 </table>
+</div>

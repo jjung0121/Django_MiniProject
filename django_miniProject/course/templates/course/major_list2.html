@@ -1,0 +1,13 @@
+<table border="1">
+<tr>
+    <td>major_ID</td><td>전공명</td><td>수정</td><td>삭제</td>
+</tr>
+{% for major in major_list  %}
+<tr>
+    <td><a href='{% url "course:m_detail" major.major_id %}'>{{major.major_id}}</a></td> 
+    <td>{{major.major_title}}</td>
+    <td><button onclick="location.href='{% url 'course:m_edit' major.major_id %}'">수정</button></td>
+    <td><button onclick="location.href='{% url 'course:m_delete' major.major_id %}'">삭제</button></td>
+</tr>
+{% endfor %}
+</table>
