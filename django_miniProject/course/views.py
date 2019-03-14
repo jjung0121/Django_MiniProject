@@ -16,9 +16,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from django.http import HttpResponse
 
-@csrf_exempt
+@csrf_exempt # 403 error 제어
 def searchMajor(request):
-    m_id = request.POST["m_id"] # 전공아이디로 검색
+    m_id = request.POST["m_title"] # 전공아이디로 검색
     major = Major.objects.filter( major_title__contains = m_id)
 
     return render(request, 'course/major_list2.html', {'major_list':major})

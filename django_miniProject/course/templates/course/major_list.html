@@ -7,7 +7,7 @@ $(function(){
             url : "/course/searchMajor/",
             datatype :"text",
             type :"POST",
-            data : {"m_id":$("#search").val()},
+            data : {"m_title":$("#search").val()},
             success : function(result){
                 // alert(result);
                 $('#here').html(result)
