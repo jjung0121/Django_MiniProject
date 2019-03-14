@@ -10,4 +10,5 @@ urlpatterns = [
     path('<pk>/edit/', views.major_edit, name = "m_edit"), # 전공 수정
     path('<pk>/delete/', views.major_delete, name = "m_delete"), # 전공 삭제
     path('new/', views.major_new, name = "m_new"), # 전공 신규 등록
+    path('searchMajor/', views.searchMajor, name = "m_search"), # 전공 조회 
 ]
