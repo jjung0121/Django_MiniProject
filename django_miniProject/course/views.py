@@ -15,6 +15,10 @@ student_edit = UpdateView.as_view(model=Student, fields="__all__", template_name
 student_delete = DeleteView.as_view(model=Student, template_name="course/student_confirm_delete.html", success_url='/course/student/')
 student_new = CreateView.as_view(model=Student, fields="__all__", template_name="course/student_form.html")
 
+# index page
+def index(request):
+
+     return render(request, 'course/index.html')
 # Ajax
 import json
 from django.views.decorators.csrf import csrf_exempt

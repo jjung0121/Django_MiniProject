@@ -5,6 +5,9 @@ from . import views
 app_name = "course"
 
 urlpatterns = [
+
+    path("",views.index, name = "index"),
+
     path('major/', views.major_list, name = "m_list"), # 전공 전체 조회
     path('major/<pk>/detail/', views.major_detail, name = "m_detail"), # 전공 상세 조회
     path('major/<pk>/edit/', views.major_edit, name = "m_edit"), # 전공 수정
