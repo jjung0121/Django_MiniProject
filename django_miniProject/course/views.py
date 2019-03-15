@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render, reverse
 from . models import Major, Student
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 # Create your views here.
@@ -23,8 +23,18 @@ from django.http import HttpResponse
 
 @csrf_exempt # 403 error 제어
 def searchMajor(request):
-    m_id = request.POST["m_title"] # 전공아이디로 검색
-    major = Major.objects.filter( major_title__contains = m_id)
+    m_title = request.POST["m_title"] # 전공아이디로 검색
+    major = Major.objects.filter( major_title__contains = m_title)
 
     return render(request, 'course/major_list2.html', {'major_list':major})
-    
+
+@csrf_exempt
+def searchStd(request):
+    m_title = request.POST["m_title"]
+    if m_title == "전체학생":
+        student = Student.objects.all
+        return render(request, 'course/student_list2.html', {'student_list':student})
+    else:    
+        student = Student.objects.filter( major__major_title__contains = m_title)
+
+        return render(request, 'course/student_list2.html', {'student_list':student})

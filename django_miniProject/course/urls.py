@@ -16,6 +16,7 @@ urlpatterns = [
     path('student<pk>/detail/', views.student_detail, name = "s_detail"), # 학생 상세 조회
     path('student/<pk>/edit/', views.student_edit, name = "s_edit"), # 전공 수정
     path('student/<pk>/delete/', views.student_delete, name = "s_delete"), # 학생 삭제
-    path('student/new/', views.student_new, name = "s_new"), # 학생 조회
+    path('student/new/', views.student_new, name = "s_new"), # 학생 생성
+    path('student/searcStd/', views.searchStd, name = "s_search"), # 학생 조회 
 
 ]
