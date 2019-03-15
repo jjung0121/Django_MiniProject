@@ -4,7 +4,7 @@ $(function(){
     $("#btn1").click(function(){
         // alert("ajax 코드")
         $.ajax({
-            url : "/course/searchMajor/",
+            url : "/course/major/searchMajor/",
             datatype :"text",
             type :"POST",
             data : {"m_title":$("#search").val()},
@@ -33,7 +33,7 @@ $(function(){
 <div id="here">
 <table border="1">
 <tr>
-    <td>major_ID</td><td>전공명</td><td>수정</td><td>삭제</td>
+    <td> 전공코드</td><td>전공명</td><td>수정</td><td>삭제</td>
 </tr>
 {% for major in major_list  %}
 <tr>

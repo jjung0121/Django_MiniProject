@@ -1,0 +1,59 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(function(){
+    $("#btn1").click(function(){
+        // alert("ajax 코드")
+        console.log($("#search").val())
+        $.ajax({
+            url : "/course/student/searcStd/",
+            datatype :"text",
+            type :"POST",
+            data : {"m_title":$("#search").val()},
+
+            success : function(result){
+                // alert(result);
+                $('#here').html(result)
+            }
+        });
+    });    
+});
+</script>
+
+<h1> 학생 전체 조회 </h1>
+
+<hr>
+<button onclick="location.href='{% url 'course:s_new' %}'">신규생성</button>
+<p>
+{% comment %} Ajax 이용한 검색 기능 구현{% endcomment %}
+<select id="search">
+    <option>전체학생</option>
+    {% for student in student_list %}    
+    <option>{{student.major}}</option>
+    {% endfor %}
+</select> 
+<button id = "btn1">학생 검색</button>
+
+<p>
+
+<div id="here">
+<table border="1">
+<tr>
+    <td> 학번</td><td>이름</td><td>전공</td><td>전화번호</td><td>주소</td><td>취미</td><td>보유기술</td><td>수정</td><td>삭제</td>
+</tr>
+{% for student in student_list  %}
+<tr>
+
+    <td><a href='{% url "course:s_detail" student.studentID %} '>{{student.studentID}}</a></td> 
+    <td>{{student.name}}</td> 
+    <td>{{student.major}}</td> 
+    <td>{{student.phone}}</td> 
+    <td>{{student.address}}</td> 
+    <td>{{student.hobby}}</td> 
+    <td>{{student.skill}}</td>
+    <td><button onclick="location.href='{% url 'course:s_edit' student.studentID %}'">수정</button></td>
+    <td><button onclick="location.href='{% url 'course:s_delete' student.studentID %}'">삭제</button></td>
+</tr>
+{% endfor %}
+</table>
+</div>
