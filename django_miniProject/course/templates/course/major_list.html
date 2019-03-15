@@ -4,7 +4,7 @@ $(function(){
     $("#btn1").click(function(){
         // alert("ajax 코드")
         $.ajax({
-            url : "/course/searchMajor/",
+            url : "/course/major/searchMajor/",
             datatype :"text",
             type :"POST",
             data : {"m_title":$("#search").val()},
