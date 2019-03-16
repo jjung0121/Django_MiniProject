@@ -22,4 +22,7 @@ urlpatterns = [
     path('student/new/', views.student_new, name = "s_new"), # 학생 생성
     path('student/searcStd/', views.searchStd, name = "s_search"), # 학생 조회 
 
+    path("data/",views.manageData, name = "data"),
+    path("data/del/",views.deleteData, name = "del_data"),
+
 ]
