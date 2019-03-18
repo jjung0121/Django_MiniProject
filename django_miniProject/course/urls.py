@@ -25,4 +25,5 @@ urlpatterns = [
     path("data/",views.manageData, name = "data"),
     path("data/del/",views.deleteData, name = "del_data"),
 
+
 ]

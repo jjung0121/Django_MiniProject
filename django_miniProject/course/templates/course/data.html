@@ -1,5 +1,15 @@
 <h1>데이터 관리</h1>
 
-<button onclick="location.href='{% url 'course:del_data' %}'"> 기존 데이터 전체 삭제 </button>
+<button onclick="location.href='{% url 'course:del_data' %}'"> 기존 데이터 전체 삭제 </button><p>
+
+<form method="POST" enctype="multipart/form-data"> 
+    {% csrf_token %}
+    <input name="data_type" value="major_data" type="radio"> : 전공 데이터<p> 
+    <input name="data_type" value="std_data" type="radio"> : 학생 데이터<p>
+    <input type='file' name="upload_data" required/>
+    <input type='submit' value='저장하기'/>
+</form> 
+
+
 
 
