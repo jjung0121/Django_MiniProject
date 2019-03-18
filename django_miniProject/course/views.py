@@ -15,6 +15,72 @@ student_edit = UpdateView.as_view(model=Student, fields="__all__", template_name
 student_delete = DeleteView.as_view(model=Student, template_name="course/student_confirm_delete.html", success_url='/course/student/')
 student_new = CreateView.as_view(model=Student, fields="__all__", template_name="course/student_form.html")
 
+# index page
+def index(request):
+    return render(request, 'course/index.html')
+
+
+# 데이터 관리 페이지
+def manageData(request):
+    if request.method == 'POST':        
+        uploaded_file = request.FILES["upload_data"]
+
+        # MySQL Connection 연결
+        conn = pymysql.connect(host = 'localhost', 
+                            user = 'root', 
+                            password = '1234',
+                            db = 'course', 
+                            charset='utf8')
+
+        # Connection 으로부터 Cursor 생성
+        curs = conn.cursor()
+
+        csv_data = pd.read_csv(uploaded_file)
+
+        # radio button에 따라 sql문 구분        
+        data_type = request.POST.get('data_type')
+        sql = ""
+        if data_type == "major_data":
+            sql="INSERT INTO course_major(major_id, major_title) values(%s, %s)"
+
+        elif data_type == "std_data":
+            csv_data = csv_data.fillna("")
+            sql = "INSERT INTO course_student(studentID, name, major_id, phone, address, hobby, skill) values(%s, %s, %s, %s, %s, %s, %s)"
+        
+        # sql에 따라 db data 삽입 
+        for row in csv_data.get_values():
+            curs.execute(sql, tuple(row))
+
+        conn.commit()
+        conn.close()
+
+    return render(request, 'course/data.html')
+
+
+# 전체 데이터 삭제
+import pymysql
+def deleteData(request):
+    # MySQL Connection 연결
+    conn = pymysql.connect(host = 'localhost', 
+                       user = 'root', 
+                       password = '1234',
+                       db = 'course', 
+                       charset='utf8')
+    
+    # Connection 으로부터 Cursor 생성
+    curs = conn.cursor()    
+    # SQL문 실행
+    sql = "delete from course_student"
+    curs.execute(sql)    
+    sql = "delete from course_major"
+    curs.execute(sql)
+    # 변경사항 db 반영 
+    conn.commit()    
+    # Connection 닫기
+    conn.close()
+    return render(request, 'course/data.html')  
+
+
 # Ajax
 import json
 from django.views.decorators.csrf import csrf_exempt

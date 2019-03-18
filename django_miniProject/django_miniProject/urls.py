@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import HttpResponse
-
+from django.shortcuts import HttpResponse, redirect
+'''
 def root(request): # for 8080 root 페이지 설정
     return HttpResponse("root 입니다.")
-
+'''
 urlpatterns = [
-    path("", root), 
+    # path("", root), 
+    path('', lambda aa : redirect("course:index")),
     path('admin/', admin.site.urls),
     path('course/', include('course.urls')),
 ]
